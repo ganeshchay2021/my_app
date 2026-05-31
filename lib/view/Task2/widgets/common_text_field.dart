@@ -10,6 +10,7 @@ class CommonTextField extends StatelessWidget {
   final String labelTxt;
   final String hintTxt;
   final TextInputType textInputType;
+  final int maxLine;
 
   const CommonTextField({
     super.key,
@@ -19,6 +20,7 @@ class CommonTextField extends StatelessWidget {
     required this.labelTxt,
     required this.hintTxt,
     required this.textInputType,
+    this.maxLine = 1,
   });
 
   @override
@@ -28,6 +30,7 @@ class CommonTextField extends StatelessWidget {
     // 1. Create a helper method/variable to build the actual TextFormField
     Widget buildTextField({required bool obscure}) {
       return TextFormField(
+        maxLines: maxLine,
         keyboardType: textInputType,
         controller: textFieldController,
         obscureText: obscure,
