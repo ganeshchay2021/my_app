@@ -14,7 +14,8 @@ class PostController extends GetxController {
       final response = await PostsServices.getPosts();
 
       if (response.statusCode == 200) {
-        final dataList = response.data as List; // Explicit cast
+        final dataList = response.data as List; 
+        print("Data List: $dataList");
         final result = dataList.map((e) => PostsModel.fromJson(e)).toList();
 
         getPost.value = result;
@@ -33,4 +34,5 @@ class PostController extends GetxController {
       isLoading.value = false;
     }
   }
+
 }

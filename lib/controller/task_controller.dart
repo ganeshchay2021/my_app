@@ -145,4 +145,12 @@ class TaskController extends GetxController {
       );
     }
   }
+
+  @override
+  void onClose() {
+    // This safely disposes the text controllers when the controller leaves memory
+    titleCtrl.dispose();
+    descriptionCtrl.dispose();
+    super.onClose();
+  }
 }

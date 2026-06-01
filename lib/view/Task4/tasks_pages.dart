@@ -16,6 +16,44 @@ class TasksPages extends StatefulWidget {
 class _TasksPagesState extends State<TasksPages> {
   final controller = Get.find<TaskController>();
 
+  _showAlert(int taskId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Row(
+            children: [
+              Icon(Icons.dangerous, color: Colors.red, size: 28.sp),
+              SizedBox(width: 10),
+              Text('Delete Task'),
+            ],
+          ),
+          content: Text("Are you sure you want to delete this task?"),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: Text('Cancel', style: TextStyle(color: Color(0xFF4A61D1))),
+            ),
+            TextButton(
+              onPressed: () {
+                Loader.show(context);
+                controller.deleteTask(taskId);
+                controller.getTasks();
+                Get.back();
+
+                Loader.hide();
+              },
+              child: Text('OK', style: TextStyle(color: Color(0xFF4A61D1))),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +114,7 @@ class _TasksPagesState extends State<TasksPages> {
                         padding: const EdgeInsets.only(top: 2, right: 12),
                         child: SizedBox(
                           width: 22,
-
+    
                           child: Checkbox(
                             value: task.isCompleted == 1 ? true : false,
                             activeColor: const Color(0xFF3A708E),
@@ -105,7 +143,8 @@ class _TasksPagesState extends State<TasksPages> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                   child: Text(
@@ -133,7 +172,8 @@ class _TasksPagesState extends State<TasksPages> {
                             ),
                             const SizedBox(height: 12),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'Date: ${task.date}',
@@ -161,10 +201,7 @@ class _TasksPagesState extends State<TasksPages> {
                                     const SizedBox(width: 16),
                                     IconButton(
                                       onPressed: () {
-                                        Loader.show(context);
-                                        controller.deleteTask(task.id);
-                                        controller.getTasks();
-                                        Loader.hide();
+                                        _showAlert(task.id);
                                       },
                                       icon: Icon(
                                         Icons.delete,

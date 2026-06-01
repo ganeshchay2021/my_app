@@ -1,4 +1,4 @@
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:my_app/model/task_model.dart';
 import 'package:my_app/routes/app_routes.dart';
 import 'package:my_app/view/Task1/botton_nav_bar.dart';
@@ -8,6 +8,7 @@ import 'package:my_app/view/Task4/add_update_task.dart';
 import 'package:my_app/view/first_page.dart';
 import 'package:my_app/view/splash/splash_screen.dart';
 import 'package:my_app/view/Task4/tasks_pages.dart';
+
 class AppPages {
   static final List<GetPage<dynamic>> pages = [
     // Initial splash screen
@@ -29,10 +30,12 @@ class AppPages {
     GetPage(name: AppRoutes.taskPage, page: () => TasksPages()),
 
     //addupdate Task Page
-    GetPage(name: AppRoutes.addUpdateTask, page:(){
-       final TaskModel? task = Get.arguments;
+    GetPage(
+      name: AppRoutes.addUpdateTask,
+      page: () {
+        final TaskModel? task = Get.arguments;
         return AddUpdateTasks(task: task);
-    }),
-
+      },
+    ),
   ];
 }

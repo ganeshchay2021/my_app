@@ -16,7 +16,7 @@ class FirstPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.amber.shade300,
-        title: Text('Home View', style: TextStyle(fontSize: 20.h)),
+        title: Text('Home Page', style: TextStyle(fontSize: 20.h)),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30),
@@ -73,8 +73,8 @@ class FirstPage extends StatelessWidget {
                   backgroundColor: Colors.green.shade400,
                 ),
                 onPressed: () {
-                  Get.toNamed(AppRoutes.apiIntegration);
                   postController.fetchPost();
+                  Get.toNamed(AppRoutes.apiIntegration);
                 },
                 child: Text(
                   "API Integration",
@@ -99,7 +99,7 @@ class FirstPage extends StatelessWidget {
                   Get.toNamed(AppRoutes.taskPage);
                 },
                 child: Text(
-                  "To-Do CRUD",
+                  "To-Do CRUD App",
                   style: TextStyle(fontSize: 20.sp, color: Colors.white),
                 ),
               ),
